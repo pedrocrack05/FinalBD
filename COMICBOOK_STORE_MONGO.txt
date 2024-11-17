@@ -1,0 +1,318 @@
+use('ComicBookStore')
+
+db.createCollection("Comics");
+db.createCollection("Characters");
+db.createCollection("VillagersAndMortalArms");
+db.createCollection("Customers");
+db.createCollection("Transactions");
+
+db.Comics.insertOne({
+    Title: "Superman en Calzoncillos",
+    Description: "Una edición especial de Superman con su icónico traje.",
+    Price: 99.99,
+    Category: "Superhero"
+});
+
+db.Comics.insertOne({
+    Title: "Spiderman: origins",
+    Description: "La telaraña nunca salia por las manos",
+    Price: 15.00,
+    Category: "Superhero"
+});
+
+db.Characters.insertOne({
+    Name: "Superman",
+    Powers: ["flight", "super strength", "x-ray vision"],
+    Weaknesses: ["kryptonite"],
+    GroupAffiliations: ["Justice League"]
+});
+
+db.VillagersAndMortalArms.insertOne({
+    Name: "Lasso of Truth",
+    Description: "La cuerda mágica de Wonder Woman.",
+    Availability: true
+});
+
+db.Customers.insertOne({
+    Name: "Mauricio Garcés",
+    Birthday: ISODate("1930-12-16"),
+    Email: "mauricio@example.com",
+    PurchaseHistory: [
+        {
+            TransactionID: ObjectId(),
+            ComicID: ObjectId(), // Reemplazar con un ObjectId real de Comics
+            PurchaseDate: ISODate("2024-11-17"),
+            TotalAmount: 99.99
+        }
+    ]
+});
+
+db.Transactions.insertOne({
+    TransactionID: ObjectId(),
+    ComicID: ObjectId(), // Reemplazar con un ObjectId real de Comics
+    CustomerID: ObjectId(), // Reemplazar con un ObjectId real de Customers
+    PurchaseDate: ISODate("2024-11-17"),
+    TotalAmount: 99.99
+});
+
+db.Comics.insertMany([
+    {
+        Title: "Superman en Calzoncillos",
+        Description: "Una edición especial de Superman con su icónico traje.",
+        Price: 99.99,
+        Category: "Superhero"
+    },
+    {
+        Title: "Batman: El Caballero Asustado",
+        Description: "Un cómic emocionante de Batman enfrentando sus mayores miedos.",
+        Price: 75.50,
+        Category: "Superhero"
+    },
+    {
+        Title: "El Villano Desconocido",
+        Description: "Una historia oscura sobre un nuevo villano en la ciudad.",
+        Price: 45.00,
+        Category: "Villain"
+    },
+    {
+        Title: "La Liga de la Justicia: Reunión",
+        Description: "Un épico encuentro de los héroes más poderosos.",
+        Price: 120.00,
+        Category: "Superhero"
+    }
+]);
+
+db.Characters.insertMany([
+    {
+        Name: "Superman",
+        Powers: ["flight", "super strength", "x-ray vision"],
+        Weaknesses: ["kryptonite"],
+        GroupAffiliations: ["Justice League"]
+    },
+    {
+        Name: "Batman",
+        Powers: ["intelligence", "martial arts", "gadgets"],
+        Weaknesses: ["no superpowers"],
+        GroupAffiliations: ["Justice League"]
+    },
+    {
+        Name: "Lex Luthor",
+        Powers: ["intelligence", "wealth"],
+        Weaknesses: ["arrogance"],
+        GroupAffiliations: ["None"]
+    },
+    {
+        Name: "Wonder Woman",
+        Powers: ["super strength", "agility", "lasso of truth"],
+        Weaknesses: ["none"],
+        GroupAffiliations: ["Justice League"]
+    },
+    {
+        Name: "Thor",
+        Powers: ["thunder", "super strength"],
+        Weaknesses: ["arrogance"],
+        GroupAffiliations: ["Justice League", "Avengers"]
+    },
+    {
+        Name: "Hulk",
+        Powers: ["super strength", "regeneration"],
+        Weaknesses: ["anger issues"],
+        GroupAffiliations: ["Avengers"]
+    },
+    {
+        Name: "Flash",
+        Powers: ["super speed", "agility"],
+        Weaknesses: ["dicks"],
+        GroupAffiliations: ["Justice League", "Avengers"]
+    }
+]);
+
+
+db.VillagersAndMortalArms.insertMany([
+    {
+        Name: "Lasso of Truth",
+        Description: "La cuerda mágica de Wonder Woman.",
+        Availability: true
+    },
+    {
+        Name: "Batarang",
+        Description: "El icónico arma arrojadiza de Batman.",
+        Availability: true
+    },
+    {
+        Name: "Kryptonite Fragment",
+        Description: "Un fragmento de kryptonita que debilita a Superman.",
+        Availability: false
+    },
+    {
+        Name: "Invisible Jet",
+        Description: "El avión invisible de Wonder Woman.",
+        Availability: true
+    }
+]);
+
+db.Customers.insertMany([
+    {
+        Name: "Mauricio Garcés",
+        Birthday: ISODate("1930-12-16"),
+        Email: "mauricio@example.com",
+        PurchaseHistory: []
+    },
+    {
+        Name: "Juana Pérez",
+        Birthday: ISODate("1995-04-10"),
+        Email: "juana.perez@example.com",
+        PurchaseHistory: []
+    },
+    {
+        Name: "Pedro González",
+        Birthday: ISODate("1987-11-23"),
+        Email: "pedro.gonzalez@example.com",
+        PurchaseHistory: []
+    }
+]);
+
+db.Transactions.insertMany([
+    {
+        TransactionID: ObjectId(),
+        ComicID: ObjectId("id-del-comic-superman"),  // Reemplazar con un ID válido
+        CustomerID: ObjectId("id-del-cliente-mauricio"),  // Reemplazar con un ID válido
+        PurchaseDate: ISODate("2024-11-17"),
+        TotalAmount: 99.99
+    },
+    {
+        TransactionID: ObjectId(),
+        ComicID: ObjectId("id-del-comic-batman"),  // Reemplazar con un ID válido
+        CustomerID: ObjectId("id-del-cliente-juana"),  // Reemplazar con un ID válido
+        PurchaseDate: ISODate("2024-11-15"),
+        TotalAmount: 75.50
+    }
+]);
+
+db.Transactions.insertMany([
+    { ComicID: ObjectId("comic-superman"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-17"), TotalAmount: 99.99 },
+    { ComicID: ObjectId("comic-batman"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-18"), TotalAmount: 75.50 },
+    { ComicID: ObjectId("comic-villano"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-19"), TotalAmount: 45.00 },
+    { ComicID: ObjectId("comic-liga"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-20"), TotalAmount: 120.00 },
+    { ComicID: ObjectId("comic-superman"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-21"), TotalAmount: 99.99 },
+    { ComicID: ObjectId("comic-villano"), CustomerID: ObjectId("customer-mauricio"), PurchaseDate: ISODate("2024-11-22"), TotalAmount: 45.00 }
+]);
+
+
+db.Battles.insertMany([
+    { HeroName: "Superman", VillainName: "Lex Luthor", Outcome: "defeated", BattleDate: ISODate("2024-11-01") },
+    { HeroName: "Batman", VillainName: "The Joker", Outcome: "defeated", BattleDate: ISODate("2024-11-02") },
+    { HeroName: "Wonder Woman", VillainName: "Cheetah", Outcome: "defeated", BattleDate: ISODate("2024-11-03") },
+    { HeroName: "Superman", VillainName: "Lex Luthor", Outcome: "defeated", BattleDate: ISODate("2024-11-04") },
+    { HeroName: "Batman", VillainName: "The Joker", Outcome: "defeated", BattleDate: ISODate("2024-11-05") },
+    { HeroName: "Superman", VillainName: "Lex Luthor", Outcome: "defeated", BattleDate: ISODate("2024-11-06") },
+    { HeroName: "Batman", VillainName: "The Penguin", Outcome: "draw", BattleDate: ISODate("2024-11-07") },
+    { HeroName: "Wonder Woman", VillainName: "Ares", Outcome: "won", BattleDate: ISODate("2024-11-08") },
+    { HeroName: "Superman", VillainName: "Lex Luthor", Outcome: "defeated", BattleDate: ISODate("2024-11-09") },
+    { HeroName: "Batman", VillainName: "The Joker", Outcome: "defeated", BattleDate: ISODate("2024-11-12") },
+    { HeroName: "Batman", VillainName: "The Joker", Outcome: "defeated", BattleDate: ISODate("2024-11-17") }
+]);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+db.Comics.find(
+    { Price: { $lt: 20 } },
+    { Title: 1, Price: 1, _id: 0 }
+).sort({ Title: 1 });
+
+db.Characters.find(
+    { Powers: "flight" },
+    { Name: 1, Powers: 1, _id: 0 }
+).sort({ Name: 1 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+db.Battles.aggregate([
+    { $match: { Outcome: "defeated" } },
+    { $group: { _id: "$VillainName", Defeats: { $sum: 1 } } },
+    { $match: { Defeats: { $gt: 3 } } }
+]);
+
+db.Transactions.aggregate([
+    {
+        $group: {
+            _id: "$CustomerID",
+            TotalComics: { $count: {} },
+            TotalSpent: { $sum: "$TotalAmount" }
+        }
+    },
+    { $match: { TotalComics: { $gt: 5 } } },
+    {
+        $lookup: {
+            from: "Customers",
+            localField: "_id",
+            foreignField: "CustomerID",
+            as: "CustomerDetails"
+        }
+    },
+    {
+        $project: {
+            CustomerName: "$CustomerDetails.Name",
+            TotalComics: 1,
+            TotalSpent: 1
+        }
+    }
+]);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+db.Transactions.aggregate([
+    {
+        $lookup: {
+            from: "Comics",
+            localField: "ComicID",
+            foreignField: "_id",
+            as: "ComicDetails"
+        }
+    },
+    { $unwind: "$ComicDetails" },
+    {
+        $group: {
+            _id: "$ComicDetails.Category",
+            TotalPurchases: { $sum: 1 }
+        }
+    },
+    { $sort: { TotalPurchases: -1 } },
+    { $limit: 1 }
+]);
+
+db.Characters.find({
+    GroupAffiliations: { $all: ["Justice League", "Avengers"] }
+}, {
+    Name: 1,
+    _id: 0
+});
+
+db.Battles.aggregate([
+    {
+        $lookup: {
+            from: "Comics",
+            localField: "_id",
+            foreignField: "BattleID",
+            as: "ComicDetails"
+        }
+    },
+    {
+        $lookup: {
+            from: "VillagersAndMortalArms",
+            pipeline: [{ $match: { Availability: true } }],
+            as: "AvailableMortalArms"
+        }
+    },
+    {
+        $match: {
+            Outcome: { $in: ["defeated", "draw", "won"] }
+        }
+    },
+    {
+        $project: {
+            "ComicDetails.Title": 1,
+            "AvailableMortalArms.Name": 1
+        }
+    }
+]);
